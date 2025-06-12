@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Hra</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            grid-template-rows: repeat(3, 80px);
+            gap: 5px;
+            width: 255px;
+            margin: 50px auto;
+        }
+        .cell {
+            width: 80px; height: 80px;
+            background: #fff;
+            border: 2px solid #007bff;
+            font-size: 2.5em;
+            text-align: center;
+            line-height: 80px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .cell.disabled {
+            pointer-events: none;
+            color: #aaa;
+        }
+        #status {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        #play-again {
+            display: none;
+            width: 300px;
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="board">
+        <% for(let i=0; i<9; i++) { %>
+            <div class="cell" data-index="<%= i %>"></div>
+        <% } %>
+    </div>
+    <div id="status">Čekám na soupeře...</div>
+    <button id="play-again">Hrát znovu</button>
+    <script>
+        window.nickname = "<%= nickname %>";
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+</body>
+</html>
